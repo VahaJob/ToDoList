@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32407.343
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoList.MVC", "ToDoList\ToDoList.MVC.csproj", "{A063C935-9902-4518-BF3F-0DF362804F6D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UI\MVC\ToDoList.MVC", "UI\MVC\ToDoList.MVC.csproj", "{A063C935-9902-4518-BF3F-0DF362804F6D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{0DC3E885-A676-4431-B509-9A1D85AF6E55}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataAccess", "DataAccess", "{08A93ECE-40DF-4257-8740-1D7287864F2A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoList.Core", "ToDoList.Core\ToDoList.Core.csproj", "{89222A91-631D-401F-8A13-2E9520897B22}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoList.Core", "Core\ToDoList.Core.csproj", "{89222A91-631D-401F-8A13-2E9520897B22}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoList.Data", "ToDoList.DataAccess\ToDoList.Data.csproj", "{F597AB3F-2C58-4BB3-980C-06DC40C4DA6E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoList.DataAccess", "DataAccess\ToDoList.DataAccess.csproj", "{F597AB3F-2C58-4BB3-980C-06DC40C4DA6E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{8C48C989-6DE2-4574-B951-BA99EF3CD944}"
 EndProject

@@ -8,9 +8,13 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Compile Remove="Models\DataAccess\Dal.Service.Implementation\Validation\**" />
       <Compile Remove="Models\DataAccess\Data\Scripts\**" />
+      <Content Remove="Models\DataAccess\Dal.Service.Implementation\Validation\**" />
       <Content Remove="Models\DataAccess\Data\Scripts\**" />
+      <EmbeddedResource Remove="Models\DataAccess\Dal.Service.Implementation\Validation\**" />
       <EmbeddedResource Remove="Models\DataAccess\Data\Scripts\**" />
+      <None Remove="Models\DataAccess\Dal.Service.Implementation\Validation\**" />
       <None Remove="Models\DataAccess\Data\Scripts\**" />
     </ItemGroup>
 
@@ -31,7 +35,6 @@
 
 
     <ItemGroup>
-      <Folder Include="Models\DataAccess\Dal.Service.Implementation\Validation\ValidationService\" />
       <Folder Include="Models\DataAccess\Dal.Service.Interface\Validation\" />
       <Folder Include="Models\DataAccess\Dal.Service.Interface\Validation\ValidationInterface\" />
       <Folder Include="Models\DataAccess\Scripts\" />

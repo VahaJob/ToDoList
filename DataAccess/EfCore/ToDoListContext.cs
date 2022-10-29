@@ -16,7 +16,7 @@ namespace ToDoList.DataAccess.EfCore
             {
                 Database.Migrate();
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 throw;
             }
