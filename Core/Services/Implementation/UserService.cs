@@ -2,11 +2,15 @@
 {
     using System.Collections.Generic;
     using ToDoList.Core.Entites;
+    using ToDoList.DataAccess.EfCore;
     using ToDoList.Models.Business.Service.Interface;
-
+    using Microsoft.Extensions.Configuration;
     public class UserService : IUserService
     {
-
+        public UserService( )
+        {
+   
+        }
         public void Create(User user)
         {
             throw new NotImplementedException();
