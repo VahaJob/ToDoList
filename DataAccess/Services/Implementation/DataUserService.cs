@@ -19,11 +19,19 @@
                 _toDoListContext.Users.Add(user);
                 _toDoListContext.SaveChanges(); 
             }
-            
+            if (_toDoListContext.Users.Count() != 0)
+            {
+                var us = _toDoListContext.Users.ToList();
+            }
         }
 
        public List<User> GetUsers()
         {
+            if(_toDoListContext.Users.Count()!=0)
+            {
+                var us = _toDoListContext.Users.ToList();
+            }
+          
             return _toDoListContext.Users.ToList();
         }
 

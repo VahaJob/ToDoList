@@ -11,8 +11,12 @@ namespace ToDoList.DataAccess.EfCore
         {
             Database.Migrate();
         }
+        public ToDoListContext()
+        {
+
+        }
 
 
-        public DbSet<User>? Users { get; set; }
+        public virtual DbSet<User>? Users { get; set; }
     }
 }
