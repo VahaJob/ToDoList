@@ -2,28 +2,31 @@
 {
     using System.Collections.Generic;
     using ToDoList.Core.Entites;
-    using ToDoList.DataAccess.EfCore;
+    using ToDoList.DataAccess.EfCore.Services.Contract;
     using ToDoList.Models.Business.Service.Interface;
-    using Microsoft.Extensions.Configuration;
+    using ToDoList.Models.Helpers;
+
     public class UserService : IUserService
     {
-        public UserService( )
+        private readonly IDataUserService _dataUserService;
+        public UserService(IDataUserService dataUserService)
         {
-   
+            _dataUserService = dataUserService;
         }
         public void Create(User user)
         {
-            throw new NotImplementedException();
+            var convert = CommonConverter.FromBlToDal(user);
+            _dataUserService.Create(convert);
         }
 
-       public List<User> GetUsers()
+        public List<User> GetUsers()
         {
-            throw new NotImplementedException();
+            return _dataUserService.GetUsers().Select(CommonConverter.FromDalToBl).ToList(); ;
         }
 
-       public User GetUserByEmail(string email)
+        public User GetUserByEmail(string email)
         {
-            throw new NotImplementedException();
+            return CommonConverter.FromDalToBl(_dataUserService.GetUserByEmail(email));
         }
     }
 }
