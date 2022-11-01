@@ -5,7 +5,6 @@ namespace ToDoList.Models.DataAccess.Dal.Service.Implementation
     using System.Linq;
     using System.Threading.Tasks;
     using Microsoft.EntityFrameworkCore;
-    using Microsoft.Extensions.Configuration;
     using ToDoList.Models.DataAccess.Dal.Entites;
     using ToDoList.Models.DataAccess.Dal.Service.Interface;
     using ToDoList.Models.DataAccess.Data;
@@ -13,32 +12,22 @@ namespace ToDoList.Models.DataAccess.Dal.Service.Implementation
 
     public class DataCategoryService : IDataCategoryService
     {
-        private readonly string _connectionString;
-
         private DataToDoListContext _context { get; }
 
-        public DataCategoryService(IConfiguration configuration, DataToDoListContext context)
+        public DataCategoryService(DataToDoListContext context)
         {
             _context = context;
-            _connectionString = configuration.GetConnectionString("DataToDoListContext");
         }
 
-        private DbContextOptions<DataToDoListContext> Options()
-        {
-            var optionsBuilder = new DbContextOptionsBuilder<DataToDoListContext>();
-            var options = optionsBuilder.UseSqlServer(_connectionString)
-                .Options;
-            return options;
-        }
+
 
         public async Task<bool> CreateCategory(Category category)
         {
 
-            using (var db = new DataToDoListContext(Options()))
-            {
-                User user = await db.Users.FirstOrDefaultAsync(x => x.UserAccountId == category.UserAccountId);
+         
+                User user = await _context.Users.FirstOrDefaultAsync(x => x.UserAccountId == category.UserAccountId);
                 var isContains = false;
-                var names = await db.Categories.Where(x => x.UserAccountId == category.UserAccountId).ToListAsync();
+                var names = await _context.Categories.Where(x => x.UserAccountId == category.UserAccountId).ToListAsync();
                 foreach (var item in names)
                 {
                     if (item.Name.Contains(category.Name))
@@ -51,25 +40,24 @@ namespace ToDoList.Models.DataAccess.Dal.Service.Implementation
 
                 if (!isContains)
                 {
-                    db.Categories.Add(category);
-                    await db.SaveChangesAsync();
+                _context.Categories.Add(category);
+                    await _context.SaveChangesAsync();
                 }
                 else
                 {
                     throw new Exception($"{category.Name} is already exist in DataBase, please crete another name");
                 }
-            }
+            
 
             return true;
         }
 
         public async void DeleteCategory(int? id)
         {
-            using (var db = new DataToDoListContext(Options()))
-            {
-                var category = await db.Categories.FirstOrDefaultAsync(m => m.Id == id);
+            
+                var category = await _context.Categories.FirstOrDefaultAsync(m => m.Id == id);
 
-                var tasks = db.Tasks.ToList();
+                var tasks = _context.Tasks.ToList();
 
                 if (tasks != null)
                 {
@@ -77,15 +65,15 @@ namespace ToDoList.Models.DataAccess.Dal.Service.Implementation
                     {
                         if (category.Id == item.CategoryId)
                         {
-                            db.Tasks.Remove(item);
+                        _context.Tasks.Remove(item);
                         }
                     }
 
-                    db.Categories.Remove(category);
+                _context.Categories.Remove(category);
 
-                    await db.SaveChangesAsync();
+                    await _context.SaveChangesAsync();
                 }
-            }
+            
         }
 
         public async Task<Category> UpdateCategory(Category category)
@@ -95,24 +83,22 @@ namespace ToDoList.Models.DataAccess.Dal.Service.Implementation
                 return category;
             }
 
-            using (var db = new DataToDoListContext(Options()))
-            {
-                db.Categories.Update(category);
-                await db.SaveChangesAsync();
-            }
+
+            _context.Categories.Update(category);
+                await _context.SaveChangesAsync();
+            
 
             return category;
         }
 
         public async Task<List<Category>> Categories(int? userAccountId)
         {
-            using (var db = new DataToDoListContext(Options()))
-            {
-                User getUser = await db.Users.FirstOrDefaultAsync(x => x.UserAccountId == userAccountId);
+            
+                User getUser = await _context.Users.FirstOrDefaultAsync(x => x.UserAccountId == userAccountId);
 
                 List<Category> categories = new List<Category>();
 
-                foreach (Category item in db.Categories.ToList())
+                foreach (Category item in _context.Categories.ToList())
                 {
                     if (item.UserAccountId == userAccountId)
                     {
@@ -121,7 +107,7 @@ namespace ToDoList.Models.DataAccess.Dal.Service.Implementation
                 }
 
                 return await Task.Run(() => categories);
-            }
+            
         }
     }
 }

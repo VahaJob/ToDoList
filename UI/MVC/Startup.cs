@@ -4,7 +4,6 @@
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
-    using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
@@ -53,7 +52,7 @@
 
             services.AddDbContext<DataToDoListContext>(options =>
 
-             options.UseSqlServer(Configuration.GetConnectionString("DataToDoListContext")));
+             options.UseNpgsql(Configuration.GetConnectionString("PostgresConnection")));
 
             #region Business
             // services.AddTransient<IAuthenticationService, AuthenticationService>();
