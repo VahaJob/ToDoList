@@ -9,7 +9,7 @@
         public DataToDoListContext(DbContextOptions<DataToDoListContext> options)
                    : base(options)
         {
-           Database.EnsureCreated();
+          Database.Migrate();
         }
 
         public DbSet<User> Users { get; set; }
