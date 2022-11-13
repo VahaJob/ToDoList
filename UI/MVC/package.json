@@ -13,7 +13,7 @@
     "babel-loader": "^8.0.6",
     "css-loader": "3.2.0",
     "webpack": "^4.39.3",
-    "webpack-cli": "3.3.7"
+    "webpack-cli": "3.3.12"
   },
   "engines": {
     "node": "10"
